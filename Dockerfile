@@ -26,9 +26,15 @@ ENV WORLD_API_SERVER_NAME api.world.com.ar
 
 EXPOSE 80
 
-ADD apache2.conf /etc/apache2/apache2.conf
-ADD worldapi.conf /etc/apache2/sites-available/worldapi.conf
+COPY worldapi /opt/www/worldapi
+
+COPY apache2.conf /etc/apache2/apache2.conf
+COPY worldapi.conf /etc/apache2/sites-available/worldapi.conf
 
 RUN a2ensite worldapi.conf
 
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
+CMD ["/usr/sbin/apache2ctl","-D","FOREGROUND"]
