@@ -26,8 +26,6 @@ ENV WORLD_API_SERVER_NAME api.world.com.ar
 
 EXPOSE 80
 
-VOLUME /opt/www/worldapi
-
 COPY apache2.conf /etc/apache2/apache2.conf
 COPY worldapi.conf /etc/apache2/sites-available/worldapi.conf
 
